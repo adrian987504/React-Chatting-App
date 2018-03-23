@@ -1,0 +1,53 @@
+const { sanitize } = require('express-validator/filter');
+const { check } = require('express-validator/check');
+
+const { validationErrors } = require('./commonValidators');
+const messages = require('./messages/userValidationMessages');
+
+const accountTypes = require('./../../models/user/enums/accountTypes');
+
+const emailValidator = [
+  sanitize('email').normalizeEmail(),
+  check('email', messages.email.invalid).isEmail()
+];
+
+const passwordValidator = field => [
+  check(field, messages[field].none).exists(),
+  check(field, messages[field].tooShort).isLength({ min: 8 }),
+  check(field, messages[field].tooEasy).matches('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*(_|\\W)).+$')
+];
+
+const registrationValidator = [
+  ...emailValidator,
+  sanitize(['firstName', 'lastName']),
+  check('firstName', messages.firstName.none).exists(),
+  check('firstName', messages.firstName.tooShort).isLength({ min: 2 }),
+  check('lastName', messages.lastName.none).exists(),
+  check('lastName', messages.lastName.tooShort).isLength({ min: 2 }),
+  ...passwordValidator('password'),
+  check('type', messages.type.invalid).exists().isIn(accountTypes)
+];
+
+const resetRequestValidator = emailValidator;
+const resetValidator = passwordValidator('password');
+
+const changePasswordValidator = passwordValidator('newPassword');
+
+module.exports = {
+  validateRegistration: [
+    registrationValidator,
+    validationErrors
+  ],
+  validateResetRequest: [
+    resetRequestValidator,
+    validationErrors
+  ],
+  validateReset: [
+    resetValidator,
+    validationErrors
+  ],
+  validateChangePassword: [
+    changePasswordValidator,
+    validationErrors
+  ]
+};
