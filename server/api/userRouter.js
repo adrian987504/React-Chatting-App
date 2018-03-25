@@ -1,8 +1,7 @@
 const express = require('express');
 const expressLocale = require('express-locale');
-const { jwt } = require('./../utils/auth');
+const { jwt } = require('../utils/auth');
 
-const emailController = require('./../controllers/emailController');
 const loginController = require('./../controllers/loginController');
 const userController = require('./../controllers/user/userController');
 
@@ -15,14 +14,15 @@ const userRouter = express.Router();
 userRouter.route('/register')
   .post(
     userController.register,
-    emailController.sendRegistrationEmail,
+    // personController.createProfile,
+    // businessController.createProfile,
+    // userController.loadProfile,
     userController.returnUser
   );
 
 userRouter.route('/verify/:verificationToken')
   .post(
     userController.verify,
-    emailController.sendWelcomeEmail,
     userController.returnSuccess
   );
 
@@ -38,7 +38,6 @@ userRouter.route('/login')
 userRouter.route('/request-reset')
   .post(
     userController.generateResetToken,
-    emailController.sendForgotPasswordEmail,
     userController.returnSuccess
   );
 
@@ -68,6 +67,7 @@ userRouter.use(
 userRouter.route('/')
   .get(
     userController.loadUser,
+    userController.loadProfile,
     userController.returnUser
   );
 
@@ -76,6 +76,18 @@ userRouter.route('/change-password')
     userController.loadUser,
     userController.changePassword,
     userController.returnSuccess
+  );
+
+userRouter.route('/coupons')
+  .get(
+    userController.loadCoupons,
+    userController.returnCoupons
+  );
+
+userRouter.route('/radio-stations')
+  .get(
+    userController.loadRadioStations,
+    userController.returnRadioStations
   );
 
 module.exports = userRouter;

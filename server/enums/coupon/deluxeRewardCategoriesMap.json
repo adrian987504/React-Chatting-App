@@ -1,0 +1,264 @@
+{
+  "discount": {
+    "$": {
+      "on": {
+        "$": "on"
+      },
+      "amenities": {
+        "$": "on/in"
+      },
+      "when staying": {
+        "$": "when staying"
+      },
+      "when purchasing": {
+        "$": "when purchasing"
+      },
+      "gastro/bar/club": {
+        "$": "on"
+      },
+      "events": {
+        "$": "on"
+      }
+    }
+  },
+  "bonus": {
+    "happy hour": {
+      "amenities": {
+        "executive lounge": "in"
+      },
+      "gastro/bar/club": {
+        "$": "on"
+      }
+    },
+    "1 free": {
+      "when staying": {
+        "$": "when staying"
+      },
+      "when purchasing": {
+        "$": "when purchasing"
+      },
+      "gastro/bar/club": {
+        "$": ""
+      },
+      "events": {
+        "convention": "admission to",
+        "concert": "admission to",
+        "event": "admission to",
+        "exhibition": "admission to",
+        "show": "admission to",
+        "entrance": "",
+        "ticket": ""
+      }
+    },
+    "no sales tax": {
+      "on": {
+        "$": "on"
+      },
+      "amenities": {
+        "executive lounge": "on/in",
+        "SPA area": "on/in"
+      },
+      "when staying": {
+        "$": "when staying"
+      },
+      "when purchasing": {
+        "$": "when purchasing"
+      },
+      "gastro/bar/club": {
+        "$": "on"
+      },
+      "events": {
+        "$": "on"
+      }
+    },
+    "get a free gift": {
+      "on": {
+        "items on sale": "when purchasing",
+        "new arrivals": "when purchasing"
+      },
+      "amenities": {
+        "$": "in"
+      },
+      "when staying": {
+        "$": "when staying"
+      },
+      "when purchasing": {
+        "$": "when purchasing"
+      },
+      "gastro/bar/club": {
+        "$": "when purchasing"
+      },
+      "events": {
+        "convention": "at",
+        "concert": "at",
+        "event": "at",
+        "exhibition": "at",
+        "show": "at",
+        "entrance": "with your",
+        "ticket": "with your"
+      }
+    }
+  },
+  "shop more get more": {
+    "$": {
+      "on": {
+        "$": "on"
+      },
+      "amenities": {
+        "executive lounge": "on/in",
+        "SPA area": "on/in"
+      },
+      "gastro/bar/club": {
+        "$": "on"
+      },
+      "events": {
+        "convention": "on/at",
+        "concert": "on/at",
+        "event": "on/at",
+        "exhibition": "on/at",
+        "show": "on/at",
+        "entrance": "on",
+        "ticket": "on"
+      }
+    }
+  },
+  "amenities": {
+    "free wifi": {
+      "amenities": {
+        "$": "at/in"
+      },
+      "when staying": {
+        "$": "when staying"
+      },
+      "when purchasing": {
+        "$": "when purchasing"
+      },
+      "gastro/bar/club": {
+        "$": "when purchasing"
+      },
+      "events": {
+        "convention": "at/in",
+        "concert": "at/in",
+        "event": "at/in",
+        "exhibition": "at/in",
+        "show": "at/in",
+        "entrance": "together with",
+        "ticket": "together with"
+      }
+    },
+    "free parking": {
+      "amenities": {
+        "$": "at/in"
+      },
+      "when staying": {
+        "$": "when staying"
+      },
+      "when purchasing": {
+        "$": "when purchasing"
+      },
+      "gastro/bar/club": {
+        "$": "when purchasing"
+      },
+      "events": {
+        "convention": "at/in",
+        "concert": "at/in",
+        "event": "at/in",
+        "exhibition": "at/in",
+        "show": "at/in",
+        "entrance": "together with",
+        "ticket": "together with"
+      }
+    },
+    "free entrance": {
+      "amenities": {
+        "$": "to"
+      },
+      "when purchasing": {
+        "$": "when purchasing"
+      },
+      "gastro/bar/club": {
+        "$": "when purchasing"
+      },
+      "events": {
+        "convention": "to",
+        "concert": "to",
+        "event": "to",
+        "exhibition": "to",
+        "show": "to"
+      }
+    },
+    "free trial period": {
+      "on": {
+        "$": "on"
+      },
+      "amenities": {
+        "gym": "at"
+      },
+      "when purchasing": {
+        "$": "when purchasing"
+      }
+    },
+    "fast lane entry": {
+      "on": {
+        "all our services": "to"
+      },
+      "amenities": {
+        "$": "to"
+      },
+      "when staying": {
+        "$": "when staying"
+      },
+      "when purchasing": {
+        "$": "when purchasing"
+      },
+      "events": {
+        "convention": "to",
+        "concert": "to",
+        "event": "to",
+        "exhibition": "to",
+        "show": "to",
+        "entrance": "together with",
+        "ticket": ""
+      }
+    },
+    "priority access": {
+      "on": {
+        "all our services": "to"
+      },
+      "amenities": {
+        "$": "to"
+      },
+      "when staying": {
+        "$": "when staying"
+      },
+      "when purchasing": {
+        "$": "when purchasing"
+      },
+      "events": {
+        "convention": "to",
+        "concert": "to",
+        "event": "to",
+        "exhibition": "to",
+        "show": "to",
+        "entrance": "together with",
+        "ticket": ""
+      }
+    },
+    "free breakfast": {
+      "amenities": {
+        "executive lounge": "in",
+        "SPA area": "in"
+      },
+      "when staying": {
+        "$": "when staying"
+      },
+      "when purchasing": {
+        "$": "when purchasing"
+      },
+      "events": {
+        "convention": "at",
+        "event": "at"
+      }
+    }
+  }
+}

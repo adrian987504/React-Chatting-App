@@ -1,8 +1,8 @@
 const express = require('express');
 const passport = require('passport');
-const { signature } = require('./..//utils/auth');
-const { notFound, jsonError } = require('./..//utils/error');
-const { parseBody, enableJsonSuccess } = require('./..//utils/middleware');
+const { signature } = require('../utils/auth');
+const { notFound, jsonError } = require('../utils/error');
+const { parseBody, enableJsonSuccess } = require('../utils/middleware');
 
 const userRouter = require('./userRouter');
 
@@ -18,7 +18,7 @@ router.use(passport.initialize());
 router.use(enableJsonSuccess);
 
 // verify the signature of all incoming requests
-router.use(signature.verify(process.env.SIGNATURE_SECRET));
+// router.use(signature.verify(process.env.SIGNATURE_SECRET));
 
 // use the appropriate router for each API section
 router.use('/user', userRouter);

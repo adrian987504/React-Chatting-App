@@ -1,5 +1,5 @@
 const { check } = require('express-validator/check');
-const { supportedImageFormats } = require('../../../enums/images');
+const { supportedImageFormats } = require('../../enums/images');
 
 const orientations = require('./../../models/__/enums/orientations');
 
