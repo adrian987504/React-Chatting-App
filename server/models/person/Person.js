@@ -137,8 +137,7 @@ personSchema.index({
 });
 
 const basicProfileKeys = [
-  'firstName',
-  'lastName',
+  'userName',
   'slogan',
   'gender',
   'dateOfBirth',
@@ -194,11 +193,11 @@ personSchema.statics.getLocationAndDistance =
 personSchema.statics.getSearchProfileKeys = function getSearchProfileKeys (person) {
   let keys = searchProfileKeys;
   if (person && person.settings) {
-    const { showCurrentLocation, showOnlyFirstName, showPinboardPublicly } = person.settings;
+    const { showCurrentLocation, showOnlyUserName, showPinboardPublicly } = person.settings;
     if (!showCurrentLocation) {
       keys = _.without(keys, 'currentlyIn');
     }
-    if (showOnlyFirstName) {
+    if (showOnlyUserName) {
       keys = _.without(keys, 'lastName');
     }
     if (!showPinboardPublicly) {

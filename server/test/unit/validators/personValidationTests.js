@@ -110,7 +110,7 @@ describe('Person Validation', () => {
 
     it('fails for not boolean showIfOnline', test.invalidBoolean('showIfOnline'));
 
-    it('fails for not boolean showOnlyFirstName', test.invalidBoolean('showOnlyFirstName'));
+    it('fails for not boolean showOnlyUserName', test.invalidBoolean('showOnlyUserName'));
 
     it('fails for not boolean showCurrentLocation', test.invalidBoolean('showCurrentLocation'));
 

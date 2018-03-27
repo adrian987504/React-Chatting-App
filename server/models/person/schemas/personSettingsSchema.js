@@ -13,7 +13,7 @@ const personSettingsSchema = new mongoose.Schema({
     default: true,
     required: true
   },
-  showOnlyFirstName: {
+  showOnlyUserName: {
     type: Boolean,
     default: false,
     required: true

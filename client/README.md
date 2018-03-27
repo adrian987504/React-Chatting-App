@@ -1,30 +1,5 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+# react-redux-registration-login-example
 
-Below you will find some information on how to perform common tasks.<br>
-You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+React + Redux - User Registration and Login Tutorial & Example
 
-# TODO
-
-. Use const on actions creators
-
-. Use === instead of ==
-
-. Use redux-thunk
-
-. Use const INITIAL_STATE on reducers
-
-. Make more adaptative/customizable reducers
-
-. Return {type:..,payload:} on actions creators
-
-. If we use typescript everything needs to be a interface or implement a interface
-
-. Use standard formatter
-
-. Clean CSS, one folder with style. Use LESS/SCSS
-
-. Remove hardcode style inline, ex: { minWidth: 1024 }
-
-# KNOW ISSUES
-
-. Mobile devices are not totally compliant with element on fixed position. We need to find a library to make sure it will work or find another approach.
+For documentation and further details go to http://jasonwatmore.com/post/2017/09/16/react-redux-user-registration-and-login-tutorial-example

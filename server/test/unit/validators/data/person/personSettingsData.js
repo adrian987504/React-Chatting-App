@@ -6,7 +6,7 @@ const validSettings = {
   allowUserMessages: true,
   showPinboardPublicly: true,
   showIfOnline: true,
-  showOnlyFirstName: false,
+  showOnlyUserName: false,
   showCurrentLocation: true,
   showProfile: true
 };

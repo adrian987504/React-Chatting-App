@@ -27,7 +27,6 @@ const register = async (req, res, next) => {
     email: req.body.email,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
-    type: req.body.type,
     isVerified: false,
     verificationToken: crypto.randomBytes(20).toString('hex')
   });

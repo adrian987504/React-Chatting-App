@@ -31,11 +31,6 @@ const userSchema = new mongoose.Schema({
     trim: true,
     required: true
   },
-  type: {
-    type: String,
-    enum: accountTypes,
-    required: true
-  },
   verificationToken: {
     type: String,
     trim: true
@@ -64,7 +59,6 @@ const basicUserKeys = [
   'email',
   'firstName',
   'lastName',
-  'type',
   'membership',
   'profileId',
   'profileIds'

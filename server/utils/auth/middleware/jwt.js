@@ -22,8 +22,6 @@ const authenticate = ({ publicKey }) => async (req, res, next) => {
     const decoded = await jwt.verify(parts[1], _.replace(publicKey, new RegExp('\\\\n', 'g'), '\n'), options);
     res.locals.user = {
       id: decoded.uid,
-      type: decoded.claims.accountType,
-      membership: decoded.claims.membership
     };
   } catch (jwtErr) {
     return next(invalidAccessTokenError);
@@ -54,10 +52,7 @@ const returnToken = ({ clientEmail, privateKey }) => (req, res) => {
 
   const payload = {
     uid: user.id,
-    claims: {
-      accountType: user.type,
-      membership
-    }
+
   };
 
   const accessToken = jwt.sign(payload, _.replace(privateKey, new RegExp('\\\\n', 'g'), '\n'), options);
