@@ -23,7 +23,6 @@ mongoose.connection.on('error', (err) => {
 require('./models/user/User');
 require('./models/person/Person');
 require('./models/business/Business');
-require('./models/membership/PaymentPlan');
 
 // start our server
 const app = require('./app');
