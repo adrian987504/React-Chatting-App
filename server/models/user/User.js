@@ -39,11 +39,7 @@ const userSchema = new mongoose.Schema({
   resetToken: {
     type: String,
     trim: true
-  },
-  coupons: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Coupon'
-  }]
+  }
 });
 
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });

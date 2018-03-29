@@ -66,7 +66,6 @@
     "start-js": "react-scripts start",
     "start-ts": "react-scripts-ts start",
     "build-js": "react-scripts build",
-    "test": "react-scripts-ts test --env=jsdom",
     "analyze": "source-map-explorer build/static/js/main.*",
     "eject": "react-scripts-ts eject"
   },
