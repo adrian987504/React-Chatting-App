@@ -3,8 +3,6 @@ const validator = require('validator');
 const mongoDbErrorHandler = require('mongoose-mongodb-errors');
 const passportLocalMongoose = require('passport-local-mongoose');
 
-const accountTypes = require('./enums/accountTypes');
-
 mongoose.Promise = global.Promise;
 
 const userSchema = new mongoose.Schema({

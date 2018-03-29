@@ -19,8 +19,6 @@ const {
 } = require('./../../common/validators/userValidators');
 
 const User = mongoose.model('User');
-const Coupon = mongoose.model('Coupon');
-const RadioStation = mongoose.model('RadioStation');
 
 const register = async (req, res, next) => {
   const user = new User({
@@ -102,22 +100,6 @@ const changePassword = async (req, res, next) => {
   return next();
 };
 
-const loadCoupons = async (req, res, next) => {
-  const { user } = res.locals;
-
-  const fullUser = await User.findById(user.id).populate('coupons');
-
-  res.locals.coupons = fullUser.coupons;
-
-  return next();
-};
-
-const loadRadioStations = async (req, res, next) => {
-  res.locals.radioStations = await RadioStation.find({}, { _id: 0, name: 1, place: 1, stream: 1 });
-
-  return next();
-};
-
 const getLocaleInfo = async (req, res, next) => {
   const { country_code: country } = await iplocation(req.ip);
   const language = req.locale.toString();
@@ -129,13 +111,6 @@ const getLocaleInfo = async (req, res, next) => {
 
 const returnSuccess = (req, res) => res.jsonSuccess();
 const returnUser = (req, res) => res.jsonSuccess(_.pick(res.locals.user, User.getBasicUserKeys()));
-const returnCoupons = (req, res) => res.jsonSuccess(
-  _.map(
-    res.locals.coupons,
-    coupon => _.pick(coupon, Coupon.getReturnCouponCustomerKeys())
-  )
-);
-const returnRadioStations = (req, res) => res.jsonSuccess(res.locals.radioStations);
 const returnLocaleInfo = (req, res) => res.jsonSuccess(res.locals.localeInfo);
 
 module.exports = {
@@ -158,12 +133,8 @@ module.exports = {
   ],
   loadUser,
   loadProfile,
-  loadCoupons: catchErrors(loadCoupons),
-  loadRadioStations: catchErrors(loadRadioStations),
   getLocaleInfo: catchErrors(getLocaleInfo),
   returnSuccess,
   returnUser,
-  returnCoupons,
-  returnRadioStations,
   returnLocaleInfo
 };

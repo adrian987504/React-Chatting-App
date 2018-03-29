@@ -78,16 +78,4 @@ userRouter.route('/change-password')
     userController.returnSuccess
   );
 
-userRouter.route('/coupons')
-  .get(
-    userController.loadCoupons,
-    userController.returnCoupons
-  );
-
-userRouter.route('/radio-stations')
-  .get(
-    userController.loadRadioStations,
-    userController.returnRadioStations
-  );
-
 module.exports = userRouter;
