@@ -26,7 +26,6 @@ require('./models/business/Business');
 require('./models/membership/Membership');
 require('./models/membership/PaymentPlan');
 require('./models/coupon/Coupon');
-require('./models/radio/RadioStation');
 
 // start our server
 const app = require('./app');
