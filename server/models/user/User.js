@@ -53,7 +53,6 @@ const basicUserKeys = [
   'email',
   'firstName',
   'lastName',
-  'membership',
   'profileId',
   'profileIds'
 ];

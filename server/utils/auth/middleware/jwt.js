@@ -36,11 +36,6 @@ const authenticate = ({ publicKey }) => async (req, res, next) => {
 
 const returnToken = ({ clientEmail, privateKey }) => (req, res) => {
   const { user } = res.locals;
-
-  const membership = user.membership
-    ? _.pick(user.membership, ['type', 'startDate', 'endDate'])
-    : { type: 'none' };
-
   const oneHour = 60 * 60;
   const options = {
     algorithm: 'RS256',
