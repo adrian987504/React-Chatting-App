@@ -47,9 +47,7 @@ userSchema.index({
 const basicUserKeys = [
   'email',
   'firstName',
-  'lastName',
-  'profileId',
-  'profileIds'
+  'lastName'
 ];
 
 userSchema.methods.matches = function matches (userId) {

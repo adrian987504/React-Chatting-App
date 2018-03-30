@@ -18,6 +18,9 @@ class HomePage extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(userActions.getAll());
+    this.socket.on('connect', () => {
+      console.log('connect');
+    });
 
     this.socket.on('init', this.initialize.bind(this));
 		this.socket.on('send:message', this.messageRecieve.bind(this));
@@ -77,7 +80,7 @@ class HomePage extends React.Component {
   }
 
   render() {
-    // const { user, users } = this.props;
+    const { user, users } = this.props;
     return (
       <div className="col-md-6 col-md-offset-3">
         <ChatView 
