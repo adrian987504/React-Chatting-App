@@ -5,7 +5,7 @@ const crypto = require('crypto');
 const iplocation = require('iplocation');
 const { catchErrors } = require('../../utils/error');
 
-const { loadUser, loadProfile } = require('./userMiddleware');
+const { loadUser } = require('./userMiddleware');
 const {
   verificationTokenError,
   resetTokenError,
@@ -132,7 +132,6 @@ module.exports = {
     catchErrors(changePassword)
   ],
   loadUser,
-  loadProfile,
   getLocaleInfo: catchErrors(getLocaleInfo),
   returnSuccess,
   returnUser,

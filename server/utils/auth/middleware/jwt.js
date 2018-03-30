@@ -27,8 +27,6 @@ const authenticate = ({ publicKey }) => async (req, res, next) => {
     return next(invalidAccessTokenError);
   }
 
-  res.locals.user.isPrivate = () => (res.locals.user.type === 'private');
-  res.locals.user.isBusiness = () => (res.locals.user.type === 'business');
   res.locals.user.matches = userId => (res.locals.user.id.toString() === userId.toString());
 
   return next();

@@ -14,9 +14,6 @@ const userRouter = express.Router();
 userRouter.route('/register')
   .post(
     userController.register,
-    // personController.createProfile,
-    // businessController.createProfile,
-    // userController.loadProfile,
     userController.returnUser
   );
 
@@ -67,7 +64,6 @@ userRouter.use(
 userRouter.route('/')
   .get(
     userController.loadUser,
-    userController.loadProfile,
     userController.returnUser
   );
 

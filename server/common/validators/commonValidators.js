@@ -2,7 +2,6 @@ const _ = require('lodash');
 const moment = require('moment');
 const { validationResult } = require('express-validator/check');
 const { validationError } = require('./../errors/generalErrors');
-const { invalidTimespanError, tooManyTimespansError } = require('./../errors/couponErrors');
 
 exports.validationErrors = (req, res, next) => {
   const validationErrors = validationResult(req);
@@ -48,38 +47,6 @@ exports.convertToDate = field => (req, res, next) => {
   } catch (e) {
     req.body[field] = undefined;
   }
-
-  return next();
-};
-
-exports.checkTimesOfDay = field => (req, res, next) => {
-  if (!req.body[field]) {
-    return next();
-  }
-
-  if (_.size(req.body[field]) > 2) {
-    return next(tooManyTimespansError);
-  }
-
-  const timesOfDay = _
-    .chain(req.body[field])
-    .sortBy('fromTime')
-    .reduce((acc, val) => {
-      if (val.fromTime >= val.toTime) {
-        return next(invalidTimespanError);
-      }
-
-      const size = _.size(acc);
-
-      if (size > 0 && val.fromTime <= acc[size - 1].toTime) {
-        return next(invalidTimespanError);
-      }
-
-      return [...acc, val];
-    }, [])
-    .value();
-
-  req.body[field] = timesOfDay;
 
   return next();
 };

@@ -19,9 +19,6 @@ module.exports = {
     none: none('last name'),
     tooShort: tooShort('last name', 2)
   },
-  type: {
-    invalid: invalid('account type')
-  },
   newPassword: {
     none: none('new password'),
     tooShort: tooShort('new password', 8),

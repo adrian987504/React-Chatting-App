@@ -1,2 +1,0 @@
-# meet.direct
-new setup

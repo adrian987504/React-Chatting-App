@@ -14,11 +14,6 @@ const userSchema = new mongoose.Schema({
     validate: [validator.isEmail, true],
     required: true
   },
-  customerId: {
-    type: String,
-    unique: true,
-    trim: true
-  },
   firstName: {
     type: String,
     trim: true,
@@ -56,14 +51,6 @@ const basicUserKeys = [
   'profileId',
   'profileIds'
 ];
-
-userSchema.methods.isPrivate = function isPrivate () {
-  return (this.type === 'private');
-};
-
-userSchema.methods.isBusiness = function isBusiness () {
-  return (this.type === 'business');
-};
 
 userSchema.methods.matches = function matches (userId) {
   return (this.id.toString() === userId.toString());

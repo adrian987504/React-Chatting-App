@@ -15,9 +15,6 @@ app.use(enableCors);
 // trust x-forwarded-proto header from proxy
 app.enable('trust proxy');
 
-// route for load balancer health checks
-app.use('/health-check', (req, res) => res.send('This server is healthy'));
-
 // handle our API routes
 app.use('/', api);
 

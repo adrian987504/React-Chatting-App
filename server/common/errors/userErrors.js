@@ -21,9 +21,3 @@ exports.userNotFoundError = {
   status: 404,
   message: 'The specified user could not be found'
 };
-
-exports.notBusinessUserError = {
-  name: 'NotBusinessUserError',
-  status: 400,
-  message: 'The current user is not a business user'
-};

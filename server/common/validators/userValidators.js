@@ -4,8 +4,6 @@ const { check } = require('express-validator/check');
 const { validationErrors } = require('./commonValidators');
 const messages = require('./messages/userValidationMessages');
 
-const accountTypes = require('./../../models/user/enums/accountTypes');
-
 const emailValidator = [
   sanitize('email').normalizeEmail(),
   check('email', messages.email.invalid).isEmail()
@@ -24,8 +22,7 @@ const registrationValidator = [
   check('firstName', messages.firstName.tooShort).isLength({ min: 2 }),
   check('lastName', messages.lastName.none).exists(),
   check('lastName', messages.lastName.tooShort).isLength({ min: 2 }),
-  ...passwordValidator('password'),
-  check('type', messages.type.invalid).exists().isIn(accountTypes)
+  ...passwordValidator('password')
 ];
 
 const resetRequestValidator = emailValidator;
