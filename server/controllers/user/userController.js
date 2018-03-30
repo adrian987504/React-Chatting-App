@@ -2,9 +2,9 @@ const _ = require('lodash');
 const mongoose = require('mongoose');
 const promisify = require('es6-promisify');
 const crypto = require('crypto');
-const iplocation = require('iplocation');
-const { catchErrors } = require('../../utils/error');
+const passport = require('passport');
 
+const { catchErrors } = require('../../utils/error');
 const { loadUser } = require('./userMiddleware');
 const {
   verificationTokenError,
@@ -100,19 +100,30 @@ const changePassword = async (req, res, next) => {
   return next();
 };
 
-const getLocaleInfo = async (req, res, next) => {
-  const { country_code: country } = await iplocation(req.ip);
-  const language = req.locale.toString();
+const returnSuccess = (req, res) => res.jsonSuccess();
+const returnUser = (req, res) => res.jsonSuccess(_.pick(res.locals.user, User.getBasicUserKeys()));
 
-  res.locals.localeInfo = { country, language };
+const localLogin = async (req, res, next) => {
+  const authPromise = new Promise((resolve, reject) =>
+    passport.authenticate('local', { session: false, failWithError: true }, (err, user, info) => {
+      if (err) {
+        return reject(err);
+      }
+
+      if (!user) {
+        return reject({ ...info, status: 401 });
+      }
+      
+      return resolve(user);  
+    })(req, res, next)
+  );
+
+  const user = await authPromise;
+
+  res.locals.user = user;
 
   return next();
 };
-
-const returnSuccess = (req, res) => res.jsonSuccess();
-const returnUser = (req, res) => res.jsonSuccess(_.pick(res.locals.user, User.getBasicUserKeys()));
-const returnLocaleInfo = (req, res) => res.jsonSuccess(res.locals.localeInfo);
-
 module.exports = {
   register: [
     validateRegistration,
@@ -132,8 +143,7 @@ module.exports = {
     catchErrors(changePassword)
   ],
   loadUser,
-  getLocaleInfo: catchErrors(getLocaleInfo),
   returnSuccess,
   returnUser,
-  returnLocaleInfo
+  localLogin
 };

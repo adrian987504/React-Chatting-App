@@ -17,15 +17,21 @@ class HomePage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(userActions.getAll());
     this.socket.on('connect', () => {
-      console.log('connect');
+      const { accessToken } = this.props.user.data;
+      this.socket.emit('init', { accessToken });
     });
 
     this.socket.on('init', this.initialize.bind(this));
 		this.socket.on('send:message', this.messageRecieve.bind(this));
 		this.socket.on('user:join', this.userJoined.bind(this));
-		this.socket.on('user:left', this.userLeft.bind(this));
+    this.socket.on('user:left', this.userLeft.bind(this));
+    
+    fetch('http://localhost:7777/message')
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ messages: data.data.reverse() });
+      });
   }
 
   initialize(data) {
@@ -44,7 +50,7 @@ class HomePage extends React.Component {
 		this.setState({users: [...users, name]});
     this.addMessage({
 			user: 'APPLICATION BOT',
-			text : name +' Joined'
+			body : name +' Joined'
     });
   }
 
@@ -60,7 +66,7 @@ class HomePage extends React.Component {
     this.setState({users});
     this.addMessage({
 			user: 'APPLICATION BOT',
-			text : name +' Left'
+			body : name +' Left'
 		})
 	}
   
@@ -75,12 +81,12 @@ class HomePage extends React.Component {
   onSendMessage() {
     const {user, text} = this.state;
     this.socket.emit('send:message', {text});
-    this.addMessage({user, text});
+    this.addMessage({user, body: text});
     this.setState({text: ''});
   }
 
   render() {
-    const { user, users } = this.props;
+    // const { user } = this.props;
     return (
       <div className="col-md-6 col-md-offset-3">
         <ChatView 
@@ -90,7 +96,7 @@ class HomePage extends React.Component {
           onInfiniteLoad={this.loadMoreHistory.bind(this)}>
           {this.state.messages.map((msg, index) => 
             <div key={index}>
-              {`${msg.user}: ${msg.text}`}
+              {`${msg.user}: ${msg.body}`}
             </div>
           )}
         </ChatView>
@@ -103,9 +109,8 @@ class HomePage extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { users, authentication } = state;
-  const { user } = authentication;
-  return {user, users};
+  const { authentication: { user } } = state;
+  return { user };
 }
 
 const connectedHomePage = connect(mapStateToProps)(HomePage);

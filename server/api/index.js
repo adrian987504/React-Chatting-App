@@ -5,6 +5,8 @@ const { notFound, jsonError } = require('../utils/error');
 const { parseBody, enableJsonSuccess } = require('../utils/middleware');
 
 const userRouter = require('./userRouter');
+const roomRouter = require('./roomRouter');
+const messageRouter = require('./messageRouter');
 
 const router = express.Router();
 
@@ -22,6 +24,10 @@ router.use(enableJsonSuccess);
 
 // use the appropriate router for each API section
 router.use('/user', userRouter);
+
+router.use('/room', roomRouter);
+
+router.use('/message', messageRouter);
 
 // if none of the routes apply, throw 404 and forward to error handler
 router.use(notFound);

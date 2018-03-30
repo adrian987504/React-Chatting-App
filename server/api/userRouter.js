@@ -1,8 +1,6 @@
 const express = require('express');
-const expressLocale = require('express-locale');
 const { jwt } = require('../utils/auth');
 
-const loginController = require('./../controllers/loginController');
 const userController = require('./../controllers/user/userController');
 
 const userRouter = express.Router();
@@ -25,7 +23,7 @@ userRouter.route('/verify/:verificationToken')
 
 userRouter.route('/login')
   .post(
-    loginController.localLogin,
+    userController.localLogin,
     jwt.returnToken({
       clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
       privateKey: process.env.FIREBASE_PRIVATE_KEY
@@ -42,13 +40,6 @@ userRouter.route('/reset/:resetToken')
   .post(
     userController.reset,
     userController.returnSuccess
-  );
-
-userRouter.route('/locale')
-  .get(
-    expressLocale(),
-    userController.getLocaleInfo,
-    userController.returnLocaleInfo
   );
 
 /**
