@@ -20,7 +20,11 @@ const returnMessages = (req, res) => res.jsonSuccess(res.locals.messages);
 const Message = mongoose.model('Message');
 
 const loadMessage = async (req, res, next) => {
-  let results = await Message.find({});
+  let results = await Message.find({
+    createdAt: {
+      $gte: new Date(new Date() - 7 * 60 * 60 * 24 * 1000)
+    }
+  });
   res.locals.messages = results;
   return next();
 };
