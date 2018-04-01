@@ -65,3 +65,33 @@ h3 {
   color: #999;
   margin-bottom: 5px;
 }
+
+
+.text-divider {
+  line-height: 0;
+  text-align: center;
+
+  margin-bottom: 15px;
+  font-size: 12px !important;
+  font-weight: 200;
+}
+.text-divider span {
+  display: inline-block;
+  position: relative;
+  width: 200px;
+}
+.text-divider span:before,
+.text-divider span:after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  border-top: 1px solid black;
+  top: 0;
+  width: 120px;
+}
+.text-divider span:before {
+  right: 100%;
+}
+.text-divider span:after {
+  left: 100%;
+}
