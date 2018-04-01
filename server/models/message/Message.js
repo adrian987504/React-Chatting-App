@@ -15,7 +15,9 @@ const MessageSchema = new Schema({
     // ref: 'User'
     type: String,
     required: true
-
+  },
+  createdAt: {
+    type: Date,
   }
 },
 {

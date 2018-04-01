@@ -12,6 +12,14 @@ import ChatInput from './ChatInput';
 import './ChatApp.css';
 import './App.css';
 
+function compare(a,b) {
+  if (a.createdAt < b.createdAt)
+    return -1;
+  if (a.createdAt > b.createdAt)
+    return 1;
+  return 0;
+}
+
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
@@ -30,13 +38,15 @@ class HomePage extends React.Component {
 
     this.socket.on('init', this.initialize.bind(this));
 		this.socket.on('send:message', this.messageRecieve.bind(this));
-		this.socket.on('user:join', this.userJoined.bind(this));
-    this.socket.on('user:left', this.userLeft.bind(this));
+		// this.socket.on('user:join', this.userJoined.bind(this));
+    // this.socket.on('user:left', this.userLeft.bind(this));
     
     fetch('http://localhost:7777/message')
       .then(response => response.json())
       .then(data => {
-        this.setState({ messages: data.data });
+        const result = data.data;
+        result.sort(compare);
+        this.setState({ messages: result });
       });
   }
 
@@ -49,44 +59,17 @@ class HomePage extends React.Component {
     this.addMessage(message);
 	}
 
-	userJoined(data) {
-		var {users} = this.state;
-		var {name} = data;
-    users.push(name);
-		this.setState({users: [...users, name]});
-    this.addMessage({
-			user: 'APPLICATION BOT',
-      body : name +' Joined',
-      fromMe: true
-    });
-  }
-
   addMessage(msg) {
 		var {messages} = this.state;
 		this.setState({messages: [...messages, msg]});
   }
-	userLeft(data) {
-		var {users, messages} = this.state;
-		var {name} = data;
-		var index = users.indexOf(name);
-		users.splice(index, 1);
-    this.setState({users});
-    this.addMessage({
-			user: 'APPLICATION BOT',
-			body : name +' Left',
-      fromMe: true
-		})
-  }
-  
   onSendMessage(message) {
     const {username} = this.state;
-    console.log({text: message, author: username});
     this.socket.emit('send:message', {text: message, author: username});
-    this.addMessage({author: username, body: message, fromMe: username});
+    this.addMessage({author: username, body: message, fromMe: username, createdAt: new Date()});
   }
 
   render() {
-    // const { user } = this.props;
     return (
       <div className="container">
         <Messages messages={this.state.messages} />

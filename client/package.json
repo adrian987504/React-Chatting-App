@@ -10,6 +10,7 @@
     "start": "webpack-dev-server --open"
   },
   "dependencies": {
+    "dateformat": "^3.0.3",
     "history": "^4.6.3",
     "react": "^16.0.0",
     "react-chat-elements": "^0.8.2",
