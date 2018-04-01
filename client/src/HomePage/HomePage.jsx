@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -6,12 +7,17 @@ import openSocket from 'socket.io-client';
 import ChatView from 'react-chatview';
 import { userActions } from '../_actions';
 
+import Messages from './Messages';
+import ChatInput from './ChatInput';
+import './ChatApp.css';
+import './App.css';
+
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       messages: [],
-      text: '',
+      username: localStorage.getItem('email'),
     };
     this.socket = openSocket('http://localhost:8000');
   }
@@ -30,7 +36,7 @@ class HomePage extends React.Component {
     fetch('http://localhost:7777/message')
       .then(response => response.json())
       .then(data => {
-        this.setState({ messages: data.data.reverse() });
+        this.setState({ messages: data.data });
       });
   }
 
@@ -50,13 +56,14 @@ class HomePage extends React.Component {
 		this.setState({users: [...users, name]});
     this.addMessage({
 			user: 'APPLICATION BOT',
-			body : name +' Joined'
+      body : name +' Joined',
+      fromMe: true
     });
   }
 
   addMessage(msg) {
 		var {messages} = this.state;
-		this.setState({messages: [msg, ...messages]});
+		this.setState({messages: [...messages, msg]});
   }
 	userLeft(data) {
 		var {users, messages} = this.state;
@@ -66,42 +73,24 @@ class HomePage extends React.Component {
     this.setState({users});
     this.addMessage({
 			user: 'APPLICATION BOT',
-			body : name +' Left'
+			body : name +' Left',
+      fromMe: true
 		})
-	}
-  
-  loadMoreHistory () {
-    return new Promise((resolve, reject) => {
-      let more = _.range(20).map(v=>'yo');
-      this.setState({ messages: this.state.messages.concat(more)});
-      resolve();
-    });
   }
-
-  onSendMessage() {
-    const {user, text} = this.state;
-    this.socket.emit('send:message', {text});
-    this.addMessage({user, body: text});
-    this.setState({text: ''});
+  
+  onSendMessage(message) {
+    const {username} = this.state;
+    console.log({text: message, author: username});
+    this.socket.emit('send:message', {text: message, author: username});
+    this.addMessage({author: username, body: message, fromMe: username});
   }
 
   render() {
     // const { user } = this.props;
     return (
-      <div className="col-md-6 col-md-offset-3">
-        <ChatView 
-          className="content"
-          flipped={true}
-          scrollLoadThreshold={50}
-          onInfiniteLoad={this.loadMoreHistory.bind(this)}>
-          {this.state.messages.map((msg, index) => 
-            <div key={index}>
-              {`${msg.user}: ${msg.body}`}
-            </div>
-          )}
-        </ChatView>
-        <input value = {this.state.text} onChange={(e) => this.setState({text: e.target.value})}></input>
-        <button onClick={()=>this.onSendMessage()}>send</button>
+      <div className="container">
+        <Messages messages={this.state.messages} />
+        <ChatInput onSend={this.onSendMessage.bind(this)} />
         <p><Link to="/login">Logout</Link></p>
       </div>
     );

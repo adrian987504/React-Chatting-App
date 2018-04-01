@@ -17,5 +17,4 @@ msgRouter.route('/')
     msgController.returnMessages
 );
 
-
 module.exports = msgRouter;

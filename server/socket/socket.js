@@ -80,8 +80,9 @@ module.exports = function (socket) {
   // broadcast a user's message to other users
   socket.on('send:message', function (data) {
     const {text, author} = data;
-    addMessage(text);
-    // addMessage(text, author);
+    console.log(data);
+    // addMessage(text);
+    addMessage(text, author);
     socket.broadcast.emit('send:message', {
       user: name,
       body: text,
