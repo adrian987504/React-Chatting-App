@@ -12,7 +12,7 @@ const emailValidator = [
 const passwordValidator = field => [
   check(field, messages[field].none).exists(),
   check(field, messages[field].tooShort).isLength({ min: 8 }),
-  check(field, messages[field].tooEasy).matches('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*(_|\\W)).+$')
+  // check(field, messages[field].tooEasy).matches('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*(_|\\W)).+$')
 ];
 
 const registrationValidator = [
