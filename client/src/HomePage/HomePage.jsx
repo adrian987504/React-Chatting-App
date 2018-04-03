@@ -4,19 +4,14 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import openSocket from 'socket.io-client';
 
-import ChatView from 'react-chatview';
-import { userActions } from '../_actions';
-
 import Messages from './Messages';
 import ChatInput from './ChatInput';
 import './ChatApp.css';
 import './App.css';
 
-function compare(a,b) {
-  if (a.createdAt < b.createdAt)
-    return -1;
-  if (a.createdAt > b.createdAt)
-    return 1;
+function compare(a, b) {
+  if (a.createdAt < b.createdAt) { return -1; }
+  if (a.createdAt > b.createdAt) { return 1; }
   return 0;
 }
 
@@ -37,36 +32,36 @@ class HomePage extends React.Component {
     });
 
     this.socket.on('init', this.initialize.bind(this));
-		this.socket.on('send:message', this.messageRecieve.bind(this));
-		// this.socket.on('user:join', this.userJoined.bind(this));
+    this.socket.on('send:message', this.messageRecieve.bind(this));
+    // this.socket.on('user:join', this.userJoined.bind(this));
     // this.socket.on('user:left', this.userLeft.bind(this));
-    
+
     fetch('http://localhost:7777/message')
       .then(response => response.json())
-      .then(data => {
+      .then((data) => {
         const result = data.data;
         result.sort(compare);
         this.setState({ messages: result });
       });
   }
 
-  initialize(data) {
-		var {users, name} = data;
-		this.setState({users, user: name});
-	}
-
-	messageRecieve(message) {
-    this.addMessage(message);
-	}
+  onSendMessage(message) {
+    const { username } = this.state;
+    this.socket.emit('send:message', { text: message, author: username });
+    this.addMessage({ author: username, body: message, fromMe: username, createdAt: new Date() });
+  }
 
   addMessage(msg) {
-		var {messages} = this.state;
-		this.setState({messages: [...messages, msg]});
+    const { messages } = this.state;
+    this.setState({ messages: [...messages, msg] });
   }
-  onSendMessage(message) {
-    const {username} = this.state;
-    this.socket.emit('send:message', {text: message, author: username});
-    this.addMessage({author: username, body: message, fromMe: username, createdAt: new Date()});
+  messageRecieve(message) {
+    this.addMessage(message);
+  }
+
+  initialize(data) {
+    const { users, name } = data;
+    this.setState({ users, user: name });
   }
 
   render() {
