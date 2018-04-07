@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -12,6 +12,7 @@ import { Header } from '../Header';
 import { HomePage } from '../HomePage';
 import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage';
+import { Workspace, WorkspaceList, WorkspaceSearch } from '../Workspace';
 
 class App extends React.Component {
   constructor(props) {
@@ -41,6 +42,9 @@ class App extends React.Component {
                 <HomeRoute exact path="/" component={HomePage} />
                 <UserRoute path="/login" component={LoginPage} />
                 <UserRoute path="/register" component={RegisterPage} />
+                <UserRoute path="/workspace" component={Workspace} />
+                <UserRoute path="/workspace_list" component={WorkspaceList} />
+                <UserRoute path="/workspace_search" component={WorkspaceSearch} />
               </div>
             </Router>
           </Col>

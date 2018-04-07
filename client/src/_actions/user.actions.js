@@ -53,12 +53,58 @@ function register(user) {
         },
       );
   };
+}
 
+function createWorkspace(user) {
+  function request(user) { return { type: userConstants.REGISTER_REQUEST, user }; }
+  function success(user) { return { type: userConstants.REGISTER_SUCCESS, user }; }
+  function failure(error) { return { type: userConstants.REGISTER_FAILURE, error }; }
 
+  return (dispatch) => {
+    dispatch(request(user));
+
+    userService.createWorkspace(user)
+      .then(
+        (user) => {
+          dispatch(success());
+          history.push('/login');
+          dispatch(alertActions.success('Workspace created successfully'));
+        },
+        (error) => {
+          dispatch(failure(error));
+          dispatch(alertActions.error(error));
+        },
+      );
+  };
+}
+
+function searchWorkspace(payload) {
+  function request(user) { return { type: userConstants.REGISTER_REQUEST, user }; }
+  function success(user) { return { type: userConstants.REGISTER_SUCCESS, user }; }
+  function failure(error) { return { type: userConstants.REGISTER_FAILURE, error }; }
+
+  return (dispatch) => {
+    dispatch(request(payload));
+
+    userService.searchWorkspace(payload)
+      .then(
+        (response) => {
+          console.log(response);
+          dispatch(success());
+          dispatch(alertActions.success(response.url));
+        },
+        (error) => {
+          dispatch(failure(error));
+          dispatch(alertActions.error(error));
+        },
+      );
+  };
 }
 
 export const userActions = {
   login,
   logout,
   register,
+  createWorkspace,
+  searchWorkspace,
 };

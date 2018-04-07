@@ -19,6 +19,7 @@ const {
 } = require('./../../common/validators/userValidators');
 
 const User = mongoose.model('User');
+const Workspace = mongoose.model('Workspace');
 
 const register = async (req, res, next) => {
   const user = new User({
@@ -33,6 +34,20 @@ const register = async (req, res, next) => {
   await registerPromise(user, req.body.password);
 
   res.locals.user = user;
+
+  return next();
+};
+
+const workspace = async (req, res, next) => {
+  console.log('workspace');
+  const workspace = new Workspace({
+    email: req.body.email,
+    fullName: req.body.firstName,
+    displayName: req.body.lastName
+  });
+
+  const registerPromise = promisify(Workspace.register, Workspace);
+  await registerPromise(workspace, req.body.password);
 
   return next();
 };

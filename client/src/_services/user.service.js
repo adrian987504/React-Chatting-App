@@ -62,6 +62,24 @@ function update(user) {
   return fetch(`/users/${user.id}`, requestOptions).then(handleResponse);
 }
 
+function createWorkspace(admin) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(admin),
+  };
+  return fetch('http://localhost:7777/workspace/create', requestOptions).then(handleResponse);
+}
+
+function searchWorkspace(admin) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(admin),
+  };
+  console.log(requestOptions);
+  return fetch('http://localhost:7777/workspace/search', requestOptions).then(handleResponse);
+}
 
 export const userService = {
   login,
@@ -69,4 +87,6 @@ export const userService = {
   register,
   getById,
   update,
+  createWorkspace,
+  searchWorkspace,
 };

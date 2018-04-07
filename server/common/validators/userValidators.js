@@ -25,12 +25,25 @@ const registrationValidator = [
   ...passwordValidator('password')
 ];
 
+const createWorkspaceValidator = [
+  ...emailValidator,
+  check('fullName', messages.firstName.none).exists(),
+  check('fullName', messages.firstName.tooShort).isLength({ min: 2 }),
+  check('displayName', messages.lastName.none).exists(),
+  check('displayName', messages.lastName.tooShort).isLength({ min: 2 }),
+  ...passwordValidator('password')
+];
+
 const resetRequestValidator = emailValidator;
 const resetValidator = passwordValidator('password');
 
 const changePasswordValidator = passwordValidator('newPassword');
 
 module.exports = {
+  validateCreateWorkspace: [
+    createWorkspaceValidator,
+    validationErrors
+  ],
   validateRegistration: [
     registrationValidator,
     validationErrors

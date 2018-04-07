@@ -7,6 +7,7 @@ const { parseBody, enableJsonSuccess } = require('../utils/middleware');
 const userRouter = require('./userRouter');
 const roomRouter = require('./roomRouter');
 const messageRouter = require('./messageRouter');
+const workspaceRouter = require('./workspaceRouter');
 
 const router = express.Router();
 
@@ -28,6 +29,8 @@ router.use('/user', userRouter);
 router.use('/room', roomRouter);
 
 router.use('/message', messageRouter);
+
+router.use('/workspace', workspaceRouter);
 
 // if none of the routes apply, throw 404 and forward to error handler
 router.use(notFound);
