@@ -37,7 +37,6 @@ class WorkspaceSearch extends React.Component {
       const payload = {
         email,
       };
-      console.log(payload);
       dispatch(userActions.searchWorkspace(payload));
     }
   }

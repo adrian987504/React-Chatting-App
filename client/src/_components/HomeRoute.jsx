@@ -7,7 +7,7 @@ export const HomeRoute = ({ component: Component, ...rest }) => (
     render={props => (
         localStorage.getItem('user')
             ? <Component {...props} />
-            : <Redirect to={{ pathname: '/workspace', state: { from: props.location } }} />
+            : <Redirect to={{ pathname: '/workspace_create', state: { from: props.location } }} />
     )} />
 );
 

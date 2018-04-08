@@ -58,7 +58,6 @@ function update(user) {
     headers: { ...authHeader(), 'Content-Type': 'application/json' },
     body: JSON.stringify(user),
   };
-
   return fetch(`/users/${user.id}`, requestOptions).then(handleResponse);
 }
 
@@ -77,7 +76,6 @@ function searchWorkspace(admin) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(admin),
   };
-  console.log(requestOptions);
   return fetch('http://localhost:7777/workspace/search', requestOptions).then(handleResponse);
 }
 
