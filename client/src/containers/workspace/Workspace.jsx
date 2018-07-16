@@ -40,7 +40,6 @@ class Workspace extends React.Component {
         email,
         password,
       };
-      console.log('====:', admin);
       dispatch(userActions.createWorkspace(admin));
     }
   }

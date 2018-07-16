@@ -27,6 +27,8 @@ function login(email, password) {
         localStorage.setItem('user', JSON.stringify(user));
       }
       return user;
+    }).catch((error) => {
+      console.log('error', JSON.stringify(error));
     });
 }
 

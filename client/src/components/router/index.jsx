@@ -6,7 +6,6 @@ export const HomeRoute = ({ component: Component, ...rest }) => {
   return (<Route
     {...rest}
     render={(props) => {
-      console.log(props.location);
       return localStorage.getItem('user')
         ? <Component {...props} />
         : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />;

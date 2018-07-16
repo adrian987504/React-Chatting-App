@@ -3,7 +3,7 @@ import { Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { Grid, Col, Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Grid, Col } from 'react-bootstrap';
 
 import { history } from '../helpers';
 import { alertActions } from '../store/actions';
@@ -35,27 +35,7 @@ class App extends React.Component {
     const { alert } = this.props;
     return (
       <React.Fragment>
-        {localStorage.getItem('user') &&
-          <Header />
-        }
-        <Navbar inverse collapseOnSelect>
-          <Navbar.Header>
-            <Navbar.Brand>
-              React Chat
-            </Navbar.Brand>
-            <Navbar.Toggle />
-          </Navbar.Header>
-          <Navbar.Collapse>
-            <Nav>
-              <NavItem eventKey={1} href="/workspace_search">
-                Find Workspace
-              </NavItem>
-              <NavItem eventKey={2} href="/workspace_create">
-                Create Workspace
-              </NavItem>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
+        <Header />
         <Grid>
           <Col sm={8} smOffset={2}>
             {alert.message &&
