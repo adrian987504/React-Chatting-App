@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { userActions } from '../_actions';
+import { userActions } from '../../store/actions';
 
 class Header extends React.Component {
   onLogout() {

@@ -5,14 +5,20 @@ import PropTypes from 'prop-types';
 
 import { Grid, Col, Navbar, Nav, NavItem } from 'react-bootstrap';
 
-import { history } from '../_helpers';
-import { alertActions } from '../_actions';
-import { HomeRoute, UserRoute } from '../_components';
-import { Header } from '../Header';
-import { HomePage } from '../HomePage';
-import { LoginPage } from '../LoginPage';
-import { RegisterPage } from '../RegisterPage';
-import { Workspace, WorkspaceSearch } from '../Workspace';
+import { history } from '../helpers';
+import { alertActions } from '../store/actions';
+import {
+  HomeRoute, UserRoute,
+  Header,
+} from '../components';
+
+import {
+  LoginPage,
+  RegisterPage,
+  HomePage,
+  Workspace,
+  WorkspaceSearch,
+} from '../containers';
 
 class App extends React.Component {
   constructor(props) {
@@ -53,7 +59,7 @@ class App extends React.Component {
         <Grid>
           <Col sm={8} smOffset={2}>
             {alert.message &&
-            <div className={`alert ${alert.type}`}>{alert.message}</div>
+              <div className={`alert ${alert.type}`}>{alert.message}</div>
             }
             <Router history={history}>
               <div>
