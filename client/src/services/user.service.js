@@ -28,7 +28,7 @@ function login(email, password) {
       }
       return user;
     }).catch((error) => {
-      console.log('error', JSON.stringify(error));
+      console.log('error', error);
     });
 }
 

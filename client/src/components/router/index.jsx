@@ -15,7 +15,7 @@ export const HomeRoute = ({ component: Component, ...rest }) => {
 
 HomeRoute.propTypes = {
   component: PropTypes.func.isRequired,
-  location: PropTypes.objectOf({}),
+  location: PropTypes.shape(),
 };
 
 HomeRoute.defaultProps = {
@@ -33,7 +33,7 @@ export const UserRoute = ({ component: Component, ...rest }) => (
 
 UserRoute.propTypes = {
   component: PropTypes.func.isRequired,
-  location: PropTypes.objectOf({}),
+  location: PropTypes.shape(),
 };
 UserRoute.defaultProps = {
   location: null,

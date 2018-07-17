@@ -1,7 +1,6 @@
 import { getUserToken } from './token';
 
 export const signPost = (req) => {
-  const reqUrl = req.url;
   const authorization = `Bearer ${getUserToken()}`;
   if (getUserToken()) {
     if (req.headers) {
@@ -14,7 +13,6 @@ export const signPost = (req) => {
 };
 
 export const signGet = (req) => {
-  const reqUrl = req.url;
   if (!req.params) {
     req.params = {};
   }

@@ -10,17 +10,14 @@ function login(username, password) {
   function failure(error) { return { type: userConstants.LOGIN_FAILURE, error }; }
   return (dispatch) => {
     dispatch(request({ username }));
-    console.log('login');
     userService.login(username, password)
       .then(
         (user) => {
-          console.log(user);
           dispatch(success(user));
           localStorage.setItem('email', username);
           history.push('/');
         },
         (error) => {
-          console.log(error);
           dispatch(failure(error));
           dispatch(alertActions.error(error));
         },

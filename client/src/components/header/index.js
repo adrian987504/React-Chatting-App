@@ -9,8 +9,7 @@ class Header extends React.Component {
     this.props.dispatch(userActions.logout());
   }
   render() {
-    console.log(localStorage.getItem('user'));
-    if (localStorage.getItem('user')) {
+    if (this.props.loggedIn) {
       return (
         <Navbar inverse collapseOnSelect>
           <Navbar.Header>
@@ -54,7 +53,18 @@ class Header extends React.Component {
 
 Header.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  loggedIn: PropTypes.bool,
+};
+Header.defaultProps = {
+  loggedIn: false,
 };
 
-const connectedHeader = connect()(Header);
+function mapStateToProps(state) {
+  const { authentication: { loggedIn } } = state;
+  return {
+    loggedIn,
+  };
+}
+
+const connectedHeader = connect(mapStateToProps)(Header);
 export { connectedHeader as Header };

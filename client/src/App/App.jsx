@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
+import { Router, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -25,8 +25,7 @@ class App extends React.Component {
     super(props);
 
     const { dispatch } = this.props;
-    history.listen((location, action) => {
-      console.log(action);
+    history.listen((/* location, action */) => {
       dispatch(alertActions.clear());
     });
   }
@@ -42,13 +41,14 @@ class App extends React.Component {
               <div className={`alert ${alert.type}`}>{alert.message}</div>
             }
             <Router history={history}>
-              <div>
+              <Switch>
                 <HomeRoute exact path="/" component={HomePage} />
                 <UserRoute path="/login" component={LoginPage} />
                 <UserRoute path="/register" component={RegisterPage} />
                 <UserRoute path="/workspace_create" component={Workspace} />
                 <UserRoute path="/workspace_search" component={WorkspaceSearch} />
-              </div>
+                <Redirect to="/" />
+              </Switch>
             </Router>
           </Col>
         </Grid>

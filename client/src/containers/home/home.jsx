@@ -69,7 +69,7 @@ class HomePage extends React.Component {
       <div className="container">
         <Messages messages={this.state.messages} />
         <ChatInput onSend={this.onSendMessage.bind(this)} />
-        <p><Link to="/login">Logout</Link></p>
+        <p><Link to="/home1">Send</Link></p>
       </div>
     );
   }
